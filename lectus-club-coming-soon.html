@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LECTUS CLUB — En préparation</title>
+    <meta name="description" content="Un espace en préparation. Quelque chose d'extraordinaire arrive.">
+    
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0d0b0a; /* Deep warm dark */
+            --accent-gold: #cfa861; /* Rich candle-light gold */
+            --accent-gold-glow: rgba(207, 168, 97, 0.12);
+            --text-parchment: #e6e0d4;
+            --text-muted: #8b857a;
+            --font-display: 'Boska', serif;
+            --font-body: 'Satoshi', sans-serif;
+        }
+
+        /* Animated breathing gradient setup using @property */
+        @property --glow-spread {
+            syntax: '<percentage>';
+            inherits: false;
+            initial-value: 20%;
+        }
+
+        @keyframes breatheGlow {
+            0% { --glow-spread: 25%; }
+            50% { --glow-spread: 40%; }
+            100% { --glow-spread: 25%; }
+        }
+
+        /* Fallback for browsers not supporting @property */
+        @keyframes breatheFallback {
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-parchment);
+            font-family: var(--font-body);
+            overflow: hidden; /* Hide scroll since it's a single view */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Pure noise overlay applied via CSS data URI */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: screen;
+        }
+
+        /* Ambient subtle background glow */
+        .ambient-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 50%, var(--accent-gold-glow) 0%, transparent 40%);
+            animation: breatheFallback 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Upgrade to @property if supported */
+        @supports (background: radial-gradient(circle at 50% 50%, red 0%, transparent var(--glow-spread))) {
+            .ambient-glow {
+                background: radial-gradient(circle at 50% 50%, var(--accent-gold-glow) 0%, transparent var(--glow-spread));
+                animation: breatheGlow 8s ease-in-out infinite;
+                transform: translate(-50%, -50%);
+                opacity: 1; /* Reset fallback opacity */
+            }
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        /* Staggered Element Reveals */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+            animation: revealClip 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            will-change: transform, opacity, clip-path;
+        }
+
+        @keyframes revealClip {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+                clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                clip-path: polygon(0 -50%, 100% -50%, 100% 150%, 0 150%);
+            }
+        }
+
+        /* Stagger Delays */
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+        .delay-4 { animation-delay: 0.6s; }
+        .delay-5 { animation-delay: 0.75s; }
+        .delay-6 { animation-delay: 0.9s; }
+
+        .logo {
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+        }
+        
+        .logo svg {
+            width: 44px;
+            height: 44px;
+            display: block;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            padding-left: 0.1em; /* optical centering relative to letter-spacing */
+            text-transform: uppercase;
+            margin: 0 0 1rem 0;
+            line-height: 1.1;
+            color: var(--text-parchment);
+        }
+
+        .tagline {
+            font-family: var(--font-body);
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin: 0 0 3.5rem 0;
+            max-width: 420px;
+            line-height: 1.6;
+        }
+
+        .countdown {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+        }
+        
+        @media (min-width: 480px) {
+            .countdown {
+                gap: 1.5rem;
+            }
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 3.5rem;
+        }
+        
+        @media (min-width: 480px) {
+            .countdown-item {
+                width: 4.5rem;
+            }
+        }
+
+        .countdown-value {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            color: var(--accent-gold);
+            margin-bottom: 0.75rem;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            height: 1em;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .countdown-value span {
+            display: block;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+        }
+
+        .separator {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: var(--text-muted);
+            opacity: 0.3;
+            line-height: 1;
+            padding-top: 0.2em; /* visual alignment with digits */
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        @media (min-width: 480px) {
+            .email-form {
+                flex-direction: row;
+            }
+        }
+
+        input[type="email"] {
+            flex-grow: 1;
+            padding: 1.25rem 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-parchment);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (min-width: 480px) {
+            input[type="email"] {
+                border-right: none;
+                border-radius: 4px 0 0 4px;
+                margin-bottom: 0;
+            }
+        }
+
+        input[type="email"]:focus {
+            border-color: var(--accent-gold);
+            background: rgba(207, 168, 97, 0.03);
+            /* Clean gold focus ring */
+            box-shadow: inset 0 0 0 1px var(--accent-gold);
+        }
+
+        input[type="email"]::placeholder {
+            color: var(--text-muted);
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        button {
+            padding: 1.25rem 2rem;
+            background: var(--accent-gold);
+            color: var(--bg-color);
+            border: 1px solid var(--accent-gold);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        @media (min-width: 480px) {
+            button {
+                border-radius: 0 4px 4px 0;
+            }
+        }
+
+        /* Button shimmer hover effect */
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.4), rgba(255,255,255,0));
+            transform: skewX(-20deg);
+            transition: left 0.5s ease;
+        }
+
+        button:hover {
+            background-color: #d8b87a;
+            border-color: #d8b87a;
+        }
+
+        button:hover::before {
+            left: 200%;
+            transition: left 0.7s ease;
+        }
+
+        button:focus-visible {
+            box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--accent-gold);
+        }
+
+        /* Accessible success message styling */
+        .success-message {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.4s ease;
+            font-weight: 400;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 2rem;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise" aria-hidden="true"></div>
+    <div class="ambient-glow" aria-hidden="true"></div>
+
+    <main>
+        <!-- Custom Inline SVG Monogram (L & C intersecting geometry) -->
+        <div class="logo reveal delay-1" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                <rect x="2" y="2" width="36" height="36" stroke-width="1" opacity="0.3"/>
+                <path d="M12 10 V30 H22" stroke-width="1.5" stroke-linecap="square"/>
+                <path d="M28 14 C25 10 18 10 18 20 C18 30 25 30 28 26" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+        </div>
+
+        <h1 class="reveal delay-2">Lectus Club</h1>
+
+        <p class="tagline reveal delay-3">Un espace en préparation. Quelque chose d'extraordinaire arrive.</p>
+
+        <!-- Live Countdown Timer -->
+        <div class="countdown reveal delay-4" aria-label="Compte à rebours jusqu'au lancement">
+            <div class="countdown-item">
+                <div class="countdown-value" id="days" aria-hidden="true"><span>00</span></div>
+                <div class="countdown-label">Jours</div>
+            </div>
+            <div class="separator" aria-hidden="true">:</div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="hours" aria-hidden="true"><span>00</span></div>
+                <div class="countdown-label">Heures</div>
+            </div>
+            <div class="separator" aria-hidden="true">:</div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="minutes" aria-hidden="true"><span>00</span></div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="separator" aria-hidden="true">:</div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="seconds" aria-hidden="true"><span>00</span></div>
+                <div class="countdown-label">Secondes</div>
+            </div>
+        </div>
+
+        <!-- Email Capture Form -->
+        <div class="form-container reveal delay-5">
+            <form class="email-form" id="notifyForm">
+                <input type="email" id="email" placeholder="Votre email" required aria-label="Adresse email">
+                <button type="submit">M'avertir</button>
+            </form>
+            <div class="success-message" id="successMessage" role="status" aria-live="polite">
+                ✓ Vous serez parmi les premiers informés.
+            </div>
+        </div>
+    </main>
+
+    <footer class="reveal delay-6">
+        © 2025 LECTUS CLUB — En construction
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Configuration: Target Launch Date (Dec 1, 2025)
+            const targetDate = new Date('2025-12-01T00:00:00').getTime();
+            
+            // DOM Elements Mapping
+            const elements = {
+                days: document.getElementById('days').querySelector('span'),
+                hours: document.getElementById('hours').querySelector('span'),
+                minutes: document.getElementById('minutes').querySelector('span'),
+                seconds: document.getElementById('seconds').querySelector('span')
+            };
+
+            let prevValues = { days: -1, hours: -1, minutes: -1, seconds: -1 };
+
+            // Morph/Flip transition for digits
+            function animateValue(el, val) {
+                if (el.textContent === val) return;
+                
+                // Animate out (slide up & fade out)
+                el.style.transform = 'translateY(-50%)';
+                el.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Update value while invisible
+                    el.textContent = val;
+                    
+                    // Reset position to bottom without transition
+                    el.style.transition = 'none';
+                    el.style.transform = 'translateY(50%)';
+                    
+                    // Force a browser reflow to apply the non-transition state
+                    void el.offsetWidth;
+                    
+                    // Restore transitions and animate in (slide up to center & fade in)
+                    el.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease';
+                    el.style.transform = 'translateY(0)';
+                    el.style.opacity = '1';
+                }, 300); // Sequence perfectly matches CSS transition duration
+            }
+
+            function updateTime() {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+
+                if (difference < 0) return; // Halt if target date is reached
+
+                // Standard time calculations
+                const timeData = {
+                    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                    hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                    minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+                    seconds: Math.floor((difference % (1000 * 60)) / 1000)
+                };
+
+                // Format strictly with leading zeroes
+                const currentValues = { 
+                    days: timeData.days.toString().padStart(2, '0'), 
+                    hours: timeData.hours.toString().padStart(2, '0'), 
+                    minutes: timeData.minutes.toString().padStart(2, '0'), 
+                    seconds: timeData.seconds.toString().padStart(2, '0') 
+                };
+
+                // Animate only changed values
+                for (const [key, val] of Object.entries(currentValues)) {
+                    if (val !== prevValues[key]) {
+                        animateValue(elements[key], val);
+                    }
+                }
+                
+                prevValues = currentValues;
+            }
+
+            // Immediately set values to bypass initial animation delay
+            const nowInfo = new Date().getTime();
+            if (targetDate - nowInfo > 0) {
+                const initDiff = targetDate - nowInfo;
+                elements.days.textContent = Math.floor(initDiff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                elements.hours.textContent = Math.floor((initDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                elements.minutes.textContent = Math.floor((initDiff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                elements.seconds.textContent = Math.floor((initDiff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }
+            
+            // Loop interval
+            setInterval(updateTime, 1000);
+
+            // Form Submit Interactivity Handling
+            const form = document.getElementById('notifyForm');
+            const successMsg = document.getElementById('successMessage');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const input = form.querySelector('input');
+                const button = form.querySelector('button');
+                
+                // Simulate async submission and style updating (frontend only)
+                button.textContent = "Inscrit";
+                button.style.backgroundColor = "transparent";
+                button.style.borderColor = "var(--accent-gold)";
+                button.style.color = "var(--accent-gold)";
+                
+                input.value = "";
+                input.disabled = true;
+                
+                // Show confirmation message mapped to aria-live
+                successMsg.classList.add('show');
+            });
+        });
+    </script>
+</body>
+</html>
