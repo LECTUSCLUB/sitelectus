@@ -26,22 +26,20 @@ export default function Home() {
             <Image 
               src="/logo.png" 
               alt="Lectus Social Club" 
-              width={160} 
-              height={160} 
+              width={140} 
+              height={140} 
               className={styles.mainLogo}
               priority
             />
           </div>
 
           <div className={styles.comingSoonHeader}>
-            <h1 className={styles.mainStatement}>
-              UNE NOUVELLE <br />
-              ÈRE DU PRESTIGE.
-            </h1>
+            <h1 className={styles.mainStatement}>L'élégance du secret.</h1>
+            <span className={styles.scriptName}>Lectus Social Club</span>
           </div>
           
           <p className={styles.loungeTagline}>
-            LECTUS SOCIAL CLUB — Ouverture prochaine.
+            Ouverture prochaine de notre espace digital.
           </p>
 
           <div className={styles.subscriptionArea}>
