@@ -26,15 +26,18 @@ export default function Home() {
             <Image 
               src="/logo.png" 
               alt="Lectus Social Club" 
-              width={180} 
-              height={180} 
+              width={160} 
+              height={160} 
               className={styles.mainLogo}
               priority
             />
           </div>
 
           <div className={styles.comingSoonHeader}>
-            <h1 className={styles.mainStatement}>L'excellence pour seul horizon.</h1>
+            <h1 className={styles.mainStatement}>
+              UNE NOUVELLE <br />
+              ÈRE DU PRESTIGE.
+            </h1>
           </div>
           
           <p className={styles.loungeTagline}>
