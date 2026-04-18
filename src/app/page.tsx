@@ -26,21 +26,19 @@ export default function Home() {
             <Image 
               src="/logo.png" 
               alt="Lectus Social Club" 
-              width={220} 
-              height={220} 
+              width={180} 
+              height={180} 
               className={styles.mainLogo}
               priority
             />
           </div>
 
           <div className={styles.comingSoonHeader}>
-            <span className={styles.subtitle}>E S T . 2 0 2 6</span>
-            <h2 className={styles.mainStatement}>Bientôt, l'exceptionnel.</h2>
+            <h1 className={styles.mainStatement}>L'adresse de l'exception.</h1>
           </div>
           
           <p className={styles.loungeTagline}>
-            Le Lectus Social Club prépare son arrivée numérique. <br />
-            Un espace exclusif où l'héritage rencontre la modernité.
+            Ouverture prochaine de l'espace numérique membres.
           </p>
 
           <div className={styles.statusBox}>
@@ -74,10 +72,7 @@ export default function Home() {
 
       <footer className={styles.loungeFooter}>
         <div className={styles.footerFlex}>
-          <span>LECTUS SOCIAL CLUB — HAUTE CONCIERGERIE & CERCLE PRIVÉ</span>
-          <div className={styles.socialIcons}>
-            <Share2 size={16} />
-          </div>
+          <span>LECTUS SOCIAL CLUB — HAUTE CONCIERGERIE</span>
         </div>
       </footer>
     </div>
