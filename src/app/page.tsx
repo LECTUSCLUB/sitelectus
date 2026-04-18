@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Martini, ScanQrCode, ShieldCheck, Instagram } from "lucide-react";
+import { ArrowRight, Martini, ScanQrCode, ShieldCheck, Share2 } from "lucide-react";
 import ParticleBackground from "./components/ParticleBackground";
 import styles from "./page.module.css";
 
@@ -104,7 +104,7 @@ export default function Home() {
         <div className={styles.footerFlex}>
           <span>© 2026 LECTUS CLUB — LUXURY LOUNGE & BAR</span>
           <div className={styles.socialIcons}>
-            <Instagram size={18} />
+            <Share2 size={18} />
           </div>
         </div>
       </footer>
