@@ -110,7 +110,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="reveal" style={{ animationDelay: "0.9s" }}>
+      <footer className={`${styles.footer} reveal`} style={{ animationDelay: "0.9s" }}>
         © 2025 LECTUS CLUB — En construction
       </footer>
     </div>
