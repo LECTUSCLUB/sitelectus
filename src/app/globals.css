@@ -36,11 +36,11 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-color: var(--bg-color);
   color: var(--text-parchment);
   font-family: var(--font-body);
-  overflow: hidden; 
+  overflow-x: hidden; 
 }
 
 /* Staggered Element Reveals */
