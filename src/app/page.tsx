@@ -46,11 +46,17 @@ export default function Home() {
                <form 
                  className={styles.loungeForm} 
                  name="invitation-request"
-                 method="POST" 
-                 data-netlify="true"
                  onSubmit={(e) => { 
-                   // Let Netlify handle the submission, but we'll show the success message locally too
-                   setIsSubscribed(true); 
+                   e.preventDefault();
+                   const modalForm = e.target;
+                   const formData = new FormData(modalForm);
+                   fetch("/", {
+                     method: "POST",
+                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                     body: new URLSearchParams(formData as any).toString(),
+                   })
+                   .then(() => setIsSubscribed(true))
+                   .catch((error) => console.error(error));
                  }}
                >
                   <input type="hidden" name="form-name" value="invitation-request" />
