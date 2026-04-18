@@ -1,0 +1,65 @@
+:root {
+  /* Light Editorial Theme Colors */
+  --bg-color: #FBF9F4; /* Soft, elegant off-white / parchment */
+  --accent-gold: #a67c2e; /* Deep rich gold/bronze for beautiful contrast */
+  --accent-gold-glow: rgba(166, 124, 46, 0.08); /* Subtle warmth */
+  --text-parchment: #1c1a17; /* Ink charcoal black */
+  --text-muted: #746d65; /* Warm editorial gray */
+  --border-color: rgba(28, 26, 23, 0.12); /* Delicate divider */
+  
+  --font-display: 'Boska', serif;
+  --font-body: 'Satoshi', sans-serif;
+}
+
+@property --glow-spread {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 20%;
+}
+
+@keyframes breatheGlow {
+  0% { --glow-spread: 25%; }
+  50% { --glow-spread: 45%; }
+  100% { --glow-spread: 25%; }
+}
+
+@keyframes breatheFallback {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-parchment);
+  font-family: var(--font-body);
+  overflow: hidden; 
+}
+
+/* Staggered Element Reveals */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  animation: revealClip 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes revealClip {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: polygon(0 -50%, 100% -50%, 100% 150%, 0 150%);
+  }
+}
