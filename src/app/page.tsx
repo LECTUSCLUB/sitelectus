@@ -8,25 +8,7 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00", seconds: "00" });
-
-  useEffect(() => {
-    const targetDate = new Date("2026-12-01T00:00:00").getTime();
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-      if (diff < 0) return clearInterval(timer);
-      
-      setTimeLeft({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, "0"),
-        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, "0"),
-        minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, "0"),
-        seconds: Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, "0"),
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
+  // Timer logic removed as per request
   return (
     <div className={styles.loungeContainer}>
       <ParticleBackground />
@@ -69,14 +51,9 @@ export default function Home() {
              <span className={styles.pulseDot}></span> Ouverture en préparation
           </div>
 
-          {/* Countdown - Speakeasy Style */}
-          <div className={styles.speakeasyCountdown}>
-             {Object.entries(timeLeft).map(([label, value]) => (
-                <div key={label} className={styles.timerSlot}>
-                   <span className={styles.timerVal}>{value}</span>
-                   <span className={styles.timerLab}>{label}</span>
-                </div>
-             ))}
+          {/* Simplified Coming Soon Message */}
+          <div className={styles.comingSoonBadge}>
+             Bientôt en ligne
           </div>
 
           {/* Subscription Section */}
