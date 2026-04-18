@@ -69,15 +69,6 @@ export default function Home() {
                </motion.div>
             )}
           </div>
-          
-          {/* Simplified Footer / Feature Info */}
-          <div className={styles.welcomeMsgWrapper}>
-            {isSubscribed && (
-               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.welcomeMsg}>
-                 ✓ Votre demande a été transmise.
-               </motion.div>
-            )}
-          </div>
         </motion.div>
       </main>
 
