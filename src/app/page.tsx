@@ -39,12 +39,12 @@ export default function Home() {
           </motion.div>
 
           <h1 className={styles.loungeTitle}>
-            LECTUS<span>CLUB</span>
+            LECTUS<span>SOCIAL</span>CLUB
           </h1>
           
           <p className={styles.loungeTagline}>
-            L'exclusivité a une nouvelle adresse. <br />
-            Un cercle privé où l'élégance rencontre la discrétion.
+            L’exclusivité au sommet de son art. <br />
+            Un cercle privé dédié à l’élégance et au raffinement.
           </p>
 
           <div className={styles.statusBox}>
@@ -55,8 +55,8 @@ export default function Home() {
           <div className={styles.subscriptionArea}>
             {!isSubscribed ? (
                <form className={styles.loungeForm} onSubmit={(e) => { e.preventDefault(); setIsSubscribed(true); }}>
-                  <input type="email" placeholder="Demander une invitation" required />
-                  <button type="submit">Rejoindre</button>
+                  <input type="email" placeholder="Saisissez votre adresse email" required />
+                  <button type="submit">Demander l'accès</button>
                </form>
             ) : (
                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.welcomeMsg}>
@@ -65,20 +65,22 @@ export default function Home() {
             )}
           </div>
           
-          <div className={styles.featureGrid}>
-             <div className={styles.featureItem}>
-                <ShieldCheck size={20} />
-                <span>Membres Uniquement</span>
-             </div>
+          {/* Simplified Footer / Feature Info */}
+          <div className={styles.welcomeMsgWrapper}>
+            {isSubscribed && (
+               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.welcomeMsg}>
+                 ✓ Votre demande a été transmise.
+               </motion.div>
+            )}
           </div>
         </motion.div>
       </main>
 
       <footer className={styles.loungeFooter}>
         <div className={styles.footerFlex}>
-          <span>© 2026 LECTUS CLUB — PRIVATE SOCIAL CLUB</span>
+          <span>LECTUS SOCIAL CLUB — HAUTE CONCIERGERIE & CERCLE PRIVÉ</span>
           <div className={styles.socialIcons}>
-            <Share2 size={18} />
+            <Share2 size={16} />
           </div>
         </div>
       </footer>
