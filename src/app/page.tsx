@@ -34,12 +34,12 @@ export default function Home() {
           </div>
 
           <div className={styles.comingSoonHeader}>
-            <h1 className={styles.mainStatement}>L'élégance du secret.</h1>
+            <h1 className={styles.mainStatement}>LE PRESTIGE PAR DISTINCTION.</h1>
             <span className={styles.scriptName}>Lectus Social Club</span>
           </div>
           
           <p className={styles.loungeTagline}>
-            Ouverture prochaine de notre espace digital.
+            Ouverture prochaine de l'espace membres.
           </p>
 
           <div className={styles.subscriptionArea}>

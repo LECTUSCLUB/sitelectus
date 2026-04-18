@@ -63,18 +63,20 @@
 
 .mainStatement {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
   color: #1a1a1a;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  letter-spacing: 0.3em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .scriptName {
   font-family: 'Mrs Saint Delafield', cursive;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: #c5a059;
-  margin-top: -0.5rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
 }
 
 .loungeTagline {
