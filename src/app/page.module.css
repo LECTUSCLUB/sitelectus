@@ -50,21 +50,15 @@
   pointer-events: none;
 }
 
-.logoBadge {
+.logoWrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
   margin-bottom: 2rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  color: #c5a059;
 }
 
-.goldIcon {
-  color: #c5a059;
-  filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.3));
+.mainLogo {
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
 }
 
 .loungeTitle {
@@ -147,16 +141,6 @@
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
 }
 
-.comingSoonBadge {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  color: #c5a059;
-  letter-spacing: 0.1em;
-  margin-bottom: 3.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 2.5rem;
-  font-weight: 500;
-}
 
 .subscriptionArea {
   width: 100%;
@@ -211,13 +195,6 @@
   font-weight: 600;
 }
 
-.decorativeQr {
-  position: absolute;
-  bottom: 0;
-  right: 2rem;
-  z-index: 0;
-  pointer-events: none;
-}
 
 .loungeFooter {
   padding: 2rem 4%;

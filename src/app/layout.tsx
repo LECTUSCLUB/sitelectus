@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LECTUS CLUB — En préparation",
-  description: "Un espace en préparation. Quelque chose d'extraordinaire arrive.",
+  title: "LECTUS CLUB — Private Social Club",
+  description: "L'excellence d'un lounge privé. Un espace exclusif dédié au raffinement et à la discrétion.",
 };
 
 export default function RootLayout({
