@@ -34,11 +34,11 @@ export default function Home() {
           </div>
 
           <div className={styles.comingSoonHeader}>
-            <h1 className={styles.mainStatement}>L'adresse de l'exception.</h1>
+            <h1 className={styles.mainStatement}>LECTUS SOCIAL CLUB PRÉPARE SON OUVERTURE.</h1>
           </div>
           
           <p className={styles.loungeTagline}>
-            Ouverture prochaine de l'espace numérique membres.
+            Bientôt en ligne.
           </p>
 
           <div className={styles.statusBox}>

@@ -71,11 +71,11 @@
 
 .mainStatement {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3rem);
-  font-weight: 400;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  font-weight: 700;
   color: #1a1a1a;
-  letter-spacing: -0.01em;
-  font-style: italic;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
 }
 
 .loungeTagline {
