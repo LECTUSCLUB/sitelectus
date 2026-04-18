@@ -1,117 +1,121 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Download, Menu, ChevronRight } from "lucide-react";
+import ParticleBackground from "./components/ParticleBackground";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: "00",
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
-  });
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const targetDate = useRef(new Date("2025-12-01T00:00:00").getTime());
+  const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00", seconds: "00" });
 
   useEffect(() => {
-    const updateTime = () => {
+    const targetDate = new Date("2025-12-01T00:00:00").getTime();
+    const timer = setInterval(() => {
       const now = new Date().getTime();
-      const difference = targetDate.current - now;
-
-      if (difference < 0) return;
-
-      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((difference % (1000 * 60)) / 1000);
-
+      const diff = targetDate - now;
+      if (diff < 0) return clearInterval(timer);
+      
       setTimeLeft({
-        days: d.toString().padStart(2, "0"),
-        hours: h.toString().padStart(2, "0"),
-        minutes: m.toString().padStart(2, "0"),
-        seconds: s.toString().padStart(2, "0"),
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, "0"),
+        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, "0"),
+        minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, "0"),
+        seconds: Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, "0"),
       });
-    };
-
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubscribed(true);
-  };
-
   return (
-    <div className={styles.container}>
-      <div className={styles.noise} aria-hidden="true" />
-      <div className={styles.ambientGlow} aria-hidden="true" />
-
-      <main className={styles.main}>
-        {/* Logo */}
-        <div className={`${styles.logo} reveal`} style={{ animationDelay: "0.15s" }}>
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor">
-            <rect x="2" y="2" width="36" height="36" strokeWidth="1.5" opacity="0.3" />
-            <path d="M12 10 V30 H22" strokeWidth="2" strokeLinecap="square" />
-            <path d="M28 14 C25 10 18 10 18 20 C18 30 25 30 28 26" strokeWidth="2" strokeLinecap="square" />
-          </svg>
+    <div className={styles.premiumContainer}>
+      <ParticleBackground />
+      
+      {/* Top Navigation Bar */}
+      <nav className={styles.navBar}>
+        <div className={styles.navBrand}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.logoMark}>
+            <svg viewBox="0 0 40 40" width="24" height="24">
+               <path d="M12 10 V30 H22" stroke="currentColor" strokeWidth="3" fill="none"/>
+               <path d="M28 14 C25 10 18 10 18 20 C18 30 25 30 28 26" stroke="currentColor" strokeWidth="3" fill="none"/>
+            </svg>
+          </motion.div>
+          <span>LECTUS CLUB</span>
         </div>
-
-        <h1 className="reveal" style={{ animationDelay: "0.3s" }}>Lectus Club</h1>
-
-        <p className={`${styles.tagline} reveal`} style={{ animationDelay: "0.45s" }}>
-          Un espace en préparation. Quelque chose d'extraordinaire arrive.
-        </p>
-
-        {/* Countdown */}
-        <div className={`${styles.countdown} reveal`} style={{ animationDelay: "0.6s" }} aria-label="Compte à rebours jusqu'au lancement">
-          <div className={styles.countdownItem}>
-            <div className={styles.countdownValue}>
-              <span key={timeLeft.days}>{timeLeft.days}</span>
-            </div>
-            <div className={styles.countdownLabel}>Jours</div>
-          </div>
-          <div className={styles.separator}>:</div>
-          <div className={styles.countdownItem}>
-            <div className={styles.countdownValue}>
-              <span key={timeLeft.hours}>{timeLeft.hours}</span>
-            </div>
-            <div className={styles.countdownLabel}>Heures</div>
-          </div>
-          <div className={styles.separator}>:</div>
-          <div className={styles.countdownItem}>
-            <div className={styles.countdownValue}>
-              <span key={timeLeft.minutes}>{timeLeft.minutes}</span>
-            </div>
-            <div className={styles.countdownLabel}>Minutes</div>
-          </div>
-          <div className={styles.separator}>:</div>
-          <div className={styles.countdownItem}>
-            <div className={styles.countdownValue}>
-              <span key={timeLeft.seconds}>{timeLeft.seconds}</span>
-            </div>
-            <div className={styles.countdownLabel}>Secondes</div>
-          </div>
+        <div className={styles.navLinks}>
+          <a href="#">Concept</a>
+          <a href="#">Bibliothèque</a>
+          <a href="#">Événements</a>
         </div>
+        <button className={styles.navButton}>
+          Rejoindre <ArrowRight size={16} />
+        </button>
+      </nav>
 
-        {/* Form */}
-        <div className={`${styles.formContainer} reveal`} style={{ animationDelay: "0.75s" }}>
-          {!isSubscribed ? (
-            <form className={styles.emailForm} onSubmit={handleSubmit}>
-              <input type="email" placeholder="Votre email" required aria-label="Adresse email" />
-              <button type="submit">M'avertir</button>
-            </form>
-          ) : (
-            <div className={styles.successMessage} role="status" aria-live="polite">
-              ✓ Vous serez parmi les premiers informés.
-            </div>
-          )}
-        </div>
+      <main className={styles.heroSection}>
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className={styles.heroContent}
+        >
+          <div className={styles.brandBadge}>
+             <span className={styles.badgeIndicator}></span> Lancement prévu en 2025
+          </div>
+          
+          <h1 className={styles.massiveTitle}>
+            Rédiger l'avenir de <br />
+            <span>la curiosité intellectuelle</span>
+          </h1>
+          
+          <p className={styles.heroDesc}>
+            Un club exclusif pour les esprits affamés de savoir. Une expérience littéraire et technologique hybride arrive bientôt.
+          </p>
+
+          <div className={styles.ctaContainer}>
+             <button className={styles.primaryBtn}>
+               S'inscrire à l'accès anticipé <ArrowRight size={18} />
+             </button>
+             <button className={styles.secondaryBtn}>
+               Explorer le concept <ChevronRight size={18} />
+             </button>
+          </div>
+
+          {/* Countdown Grid */}
+          <div className={styles.premiumCountdown}>
+             {Object.entries(timeLeft).map(([label, value], i) => (
+                <div key={label} className={styles.countdownBox}>
+                   <span className={styles.countdownValue}>{value}</span>
+                   <span className={styles.countdownLabel}>{label}</span>
+                </div>
+             ))}
+          </div>
+
+          {/* New Email Form Inspired by Antigravity */}
+          <div className={styles.emailWrapper}>
+            {!isSubscribed ? (
+               <form className={styles.modernForm} onSubmit={(e) => { e.preventDefault(); setIsSubscribed(true); }}>
+                  <input type="email" placeholder="Votre adresse email" required />
+                  <button type="submit">Notifier</button>
+               </form>
+            ) : (
+               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.congrats}>
+                 ✓ Vous êtes sur la liste d'attente.
+               </motion.div>
+            )}
+          </div>
+        </motion.div>
       </main>
 
-      <footer className={`${styles.footer} reveal`} style={{ animationDelay: "0.9s" }}>
-        © 2025 LECTUS CLUB — En construction
+      <footer className={styles.minimalFooter}>
+        <div className={styles.footerLine}></div>
+        <div className={styles.footerContent}>
+          <span>© 2025 LECTUS CLUB</span>
+          <div className={styles.footerSocials}>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+          </div>
+        </div>
       </footer>
     </div>
   );

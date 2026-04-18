@@ -1,244 +1,309 @@
-.container {
+.premiumContainer {
+  min-height: 100vh;
   width: 100%;
-  height: 100vh;
+  background-color: #ffffff;
+  color: #000000;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  background-color: var(--bg-color);
-  color: var(--text-parchment);
+  overflow-x: hidden;
 }
 
-.noise {
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4%;
   position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 10;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.ambientGlow {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle at 50% 50%, var(--accent-gold-glow) 0%, transparent 40%);
-  animation: breatheFallback 8s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
+.navBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
 }
 
-@supports (background: radial-gradient(circle at 50% 50%, red 0%, transparent var(--glow-spread))) {
-  .ambientGlow {
-    background: radial-gradient(circle at 50% 50%, var(--accent-gold-glow) 0%, transparent var(--glow-spread));
-    animation: breatheGlow 8s ease-in-out infinite;
-    transform: translate(-50%, -50%);
-    opacity: 1; 
+.logoMark {
+  color: #a67c2e;
+}
+
+.navLinks {
+  display: none;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .navLinks {
+    display: flex;
   }
 }
 
-.main {
-  position: relative;
-  z-index: 1;
+.navLinks a {
+  text-decoration: none;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: #000;
+}
+
+.navButton {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 99px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.navButton:hover {
+  transform: translateY(-2px);
+}
+
+.heroSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 1rem 4rem;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-  width: 100%;
-  max-width: 600px;
 }
 
-.logo {
-  color: var(--text-parchment);
+.brandBadge {
+  background: rgba(166, 124, 46, 0.08);
+  color: #a67c2e;
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 2rem;
 }
 
-.logo svg {
-  width: 44px;
-  height: 44px;
-  display: block;
-  margin: 0 auto;
+.badgeIndicator {
+  width: 6px;
+  height: 6px;
+  background: #a67c2e;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
 }
 
-.tagline {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  font-style: italic;
-  font-weight: 300;
-  color: var(--text-muted);
-  margin: 0 0 3.5rem 0;
-  max-width: 420px;
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(166, 124, 46, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(166, 124, 46, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(166, 124, 46, 0); }
+}
+
+.massiveTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.massiveTitle span {
+  background: linear-gradient(135deg, #a67c2e 0%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroDesc {
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  color: #666;
+  max-width: 600px;
   line-height: 1.6;
-}
-
-.countdown {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1rem;
   margin-bottom: 3.5rem;
 }
 
-@media (min-width: 480px) {
-  .countdown {
-    gap: 1.5rem;
-  }
-}
-
-.countdownItem {
+.ctaContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 3.5rem;
+  gap: 1rem;
+  margin-bottom: 4rem;
 }
 
 @media (min-width: 480px) {
-  .countdownItem {
-    width: 4.5rem;
-  }
-}
-
-.countdownValue {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 500;
-  color: var(--accent-gold);
-  margin-bottom: 0.75rem;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  height: 1em;
-  overflow: hidden;
-  position: relative;
-}
-
-.countdownValue span {
-  display: block;
-}
-
-.countdownLabel {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.separator {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  color: var(--border-color);
-  line-height: 1;
-  padding-top: 0.2em;
-}
-
-.formContainer {
-  width: 100%;
-  max-width: 420px;
-  position: relative;
-}
-
-.emailForm {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-@media (min-width: 480px) {
-  .emailForm {
+  .ctaContainer {
     flex-direction: row;
   }
 }
 
-.emailForm input {
-  flex-grow: 1;
-  padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--border-color);
-  color: var(--text-parchment);
+.primaryBtn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 1.2rem 2.4rem;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.primaryBtn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.secondaryBtn {
+  background: transparent;
+  color: #000;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 1.2rem 2.4rem;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondaryBtn:hover {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.2);
+}
+
+.premiumCountdown {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.countdownBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.countdownValue {
+  font-size: 2.5rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: #000;
+}
+
+.countdownLabel {
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.2rem;
+  color: #999;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.emailWrapper {
+  width: 100%;
+  max-width: 500px;
+}
+
+.modernForm {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 0.5rem;
+  border-radius: 99px;
+  display: flex;
+  gap: 0.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.modernForm input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 1.5rem;
+  outline: none;
   font-family: var(--font-body);
   font-size: 1rem;
-  outline: none;
-  transition: all 0.3s ease;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-  backdrop-filter: blur(5px);
 }
 
-@media (min-width: 480px) {
-  .emailForm input {
-    border-right: none;
-    border-radius: 4px 0 0 4px;
-    margin-bottom: 0;
-  }
-}
-
-.emailForm input:focus {
-  border-color: var(--accent-gold);
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1px var(--accent-gold);
-}
-
-.emailForm button {
-  padding: 1.25rem 2rem;
-  background: var(--text-parchment);
-  color: var(--bg-color);
-  border: 1px solid var(--text-parchment);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
+.modernForm button {
+  background: #a67c2e;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 99px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   cursor: pointer;
-  outline: none;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  border-radius: 4px;
-  white-space: nowrap;
+  transition: background 0.3s ease;
 }
 
-@media (min-width: 480px) {
-  .emailForm button {
-    border-radius: 0 4px 4px 0;
-  }
+.modernForm button:hover {
+  background: #8b6826;
 }
 
-.emailForm button:hover {
-  background-color: var(--accent-gold);
-  border-color: var(--accent-gold);
-  color: #ffffff;
-}
-
-.successMessage {
-  width: 100%;
-  text-align: center;
-  color: var(--accent-gold);
-  font-size: 0.9rem;
-  padding: 1rem 0;
+.congrats {
+  color: #a67c2e;
   font-weight: 600;
-  animation: fadeIn 0.4s ease;
+  font-size: 1.1rem;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.footer {
-  position: absolute;
-  bottom: 2rem;
+.minimalFooter {
+  padding: 2rem 4%;
   width: 100%;
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.7;
+}
+
+.footerLine {
+  height: 1px;
+  background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+  margin-bottom: 2rem;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: 500;
+}
+
+.footerSocials {
+  display: flex;
+  gap: 2rem;
+}
+
+.footerSocials a {
+  text-decoration: none;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.footerSocials a:hover {
+  color: #000;
 }
