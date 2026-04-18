@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Download, Menu, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Martini, ScanQrCode, ShieldCheck, Instagram } from "lucide-react";
 import ParticleBackground from "./components/ParticleBackground";
 import styles from "./page.module.css";
 
@@ -11,7 +11,7 @@ export default function Home() {
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00", seconds: "00" });
 
   useEffect(() => {
-    const targetDate = new Date("2025-12-01T00:00:00").getTime();
+    const targetDate = new Date("2026-12-01T00:00:00").getTime();
     const timer = setInterval(() => {
       const now = new Date().getTime();
       const diff = targetDate - now;
@@ -28,92 +28,83 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.premiumContainer}>
+    <div className={styles.loungeContainer}>
       <ParticleBackground />
       
-      {/* Top Navigation Bar */}
-      <nav className={styles.navBar}>
-        <div className={styles.navBrand}>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.logoMark}>
-            <svg viewBox="0 0 40 40" width="24" height="24">
-               <path d="M12 10 V30 H22" stroke="currentColor" strokeWidth="3" fill="none"/>
-               <path d="M28 14 C25 10 18 10 18 20 C18 30 25 30 28 26" stroke="currentColor" strokeWidth="3" fill="none"/>
-            </svg>
-          </motion.div>
-          <span>LECTUS CLUB</span>
-        </div>
-        <div className={styles.navLinks}>
-          <a href="#">Concept</a>
-          <a href="#">Bibliothèque</a>
-          <a href="#">Événements</a>
-        </div>
-        <button className={styles.navButton}>
-          Rejoindre <ArrowRight size={16} />
-        </button>
-      </nav>
-
-      <main className={styles.heroSection}>
+      <main className={styles.loungeHero}>
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className={styles.heroContent}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          className={styles.glassCard}
         >
-          <div className={styles.brandBadge}>
-             <span className={styles.badgeIndicator}></span> Lancement prévu en 2025
+          {/* Logo Section */}
+          <div className={styles.logoBadge}>
+            <Martini size={24} className={styles.goldIcon} />
+            <span>EST. 2026</span>
           </div>
-          
-          <h1 className={styles.massiveTitle}>
-            Rédiger l'avenir de <br />
-            <span>la curiosité intellectuelle</span>
+
+          <h1 className={styles.loungeTitle}>
+            LECTUS<span>CLUB</span>
           </h1>
           
-          <p className={styles.heroDesc}>
-            Un club exclusif pour les esprits affamés de savoir. Une expérience littéraire et technologique hybride arrive bientôt.
+          <p className={styles.loungeTagline}>
+            L'excellence d'un lounge privé. <br />
+            Redéfinir l'art du cocktail et de la détente.
           </p>
 
-          <div className={styles.ctaContainer}>
-             <button className={styles.primaryBtn}>
-               S'inscrire à l'accès anticipé <ArrowRight size={18} />
-             </button>
-             <button className={styles.secondaryBtn}>
-               Explorer le concept <ChevronRight size={18} />
-             </button>
+          {/* Features / Experience */}
+          <div className={styles.featureGrid}>
+             <div className={styles.featureItem}>
+                <ScanQrCode size={20} />
+                <span>Menu Digital QR</span>
+             </div>
+             <div className={styles.featureItem}>
+                <ShieldCheck size={20} />
+                <span>Accès Membres</span>
+             </div>
           </div>
 
-          {/* Countdown Grid */}
-          <div className={styles.premiumCountdown}>
-             {Object.entries(timeLeft).map(([label, value], i) => (
-                <div key={label} className={styles.countdownBox}>
-                   <span className={styles.countdownValue}>{value}</span>
-                   <span className={styles.countdownLabel}>{label}</span>
+          <div className={styles.statusBox}>
+             <span className={styles.pulseDot}></span> Ouverture en préparation
+          </div>
+
+          {/* Countdown - Speakeasy Style */}
+          <div className={styles.speakeasyCountdown}>
+             {Object.entries(timeLeft).map(([label, value]) => (
+                <div key={label} className={styles.timerSlot}>
+                   <span className={styles.timerVal}>{value}</span>
+                   <span className={styles.timerLab}>{label}</span>
                 </div>
              ))}
           </div>
 
-          {/* New Email Form Inspired by Antigravity */}
-          <div className={styles.emailWrapper}>
+          {/* Subscription Section */}
+          <div className={styles.subscriptionArea}>
             {!isSubscribed ? (
-               <form className={styles.modernForm} onSubmit={(e) => { e.preventDefault(); setIsSubscribed(true); }}>
-                  <input type="email" placeholder="Votre adresse email" required />
-                  <button type="submit">Notifier</button>
+               <form className={styles.loungeForm} onSubmit={(e) => { e.preventDefault(); setIsSubscribed(true); }}>
+                  <input type="email" placeholder="Demander une invitation (Email)" required />
+                  <button type="submit">S'inscrire</button>
                </form>
             ) : (
-               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.congrats}>
-                 ✓ Vous êtes sur la liste d'attente.
+               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.welcomeMsg}>
+                 ✓ Votre invitation est en cours de traitement.
                </motion.div>
             )}
           </div>
         </motion.div>
+
+        {/* Floating Decorative Elements */}
+        <div className={styles.decorativeQr}>
+           <ScanQrCode size={120} strokeWidth={0.5} opacity={0.05} />
+        </div>
       </main>
 
-      <footer className={styles.minimalFooter}>
-        <div className={styles.footerLine}></div>
-        <div className={styles.footerContent}>
-          <span>© 2025 LECTUS CLUB</span>
-          <div className={styles.footerSocials}>
-            <a href="#">Instagram</a>
-            <a href="#">Twitter</a>
+      <footer className={styles.loungeFooter}>
+        <div className={styles.footerFlex}>
+          <span>© 2026 LECTUS CLUB — LUXURY LOUNGE & BAR</span>
+          <div className={styles.socialIcons}>
+            <Instagram size={18} />
           </div>
         </div>
       </footer>

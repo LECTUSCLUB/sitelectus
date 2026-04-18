@@ -14,28 +14,25 @@ export default function ParticleBackground() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const mouse = { x: 0, y: 0, radius: 150 };
+    const mouse = { x: 0, y: 0, radius: 100 };
 
     class Particle {
       x: number;
       y: number;
-      baseX: number;
-      baseY: number;
       size: number;
       color: string;
-      density: number;
+      speedX: number;
+      speedY: number;
 
-      constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-        this.baseX = x;
-        this.baseY = y;
-        this.size = Math.random() * 2 + 1;
-        
-        // Custom mix of premium colors
-        const colors = ['#a67c2e', '#1c1a17', '#746d65', '#d4af37'];
+      constructor() {
+        this.x = Math.random() * canvas!.width;
+        this.y = Math.random() * canvas!.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        // Moody gold/amber atmospheric colors
+        const colors = ['rgba(197, 160, 89, 0.2)', 'rgba(184, 134, 11, 0.1)', 'rgba(255, 255, 255, 0.05)'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.density = (Math.random() * 30) + 1;
+        this.speedX = (Math.random() * 0.4) - 0.2;
+        this.speedY = (Math.random() * 0.4) - 0.2;
       }
 
       draw() {
@@ -48,39 +45,21 @@ export default function ParticleBackground() {
       }
 
       update() {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const forceDirectionX = dx / distance;
-        const forceDirectionY = dy / distance;
-        const maxDistance = mouse.radius;
-        const force = (maxDistance - distance) / maxDistance;
-        const directionX = forceDirectionX * force * this.density;
-        const directionY = forceDirectionY * force * this.density;
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-        if (distance < mouse.radius) {
-          this.x -= directionX;
-          this.y -= directionY;
-        } else {
-          if (this.x !== this.baseX) {
-            const dx = this.x - this.baseX;
-            this.x -= dx / 15;
-          }
-          if (this.y !== this.baseY) {
-            const dy = this.y - this.baseY;
-            this.y -= dy / 15;
-          }
-        }
+        if (this.x > canvas!.width) this.x = 0;
+        else if (this.x < 0) this.x = canvas!.width;
+        if (this.y > canvas!.height) this.y = 0;
+        else if (this.y < 0) this.y = canvas!.height;
       }
     }
 
     const init = () => {
       particles = [];
-      const numberOfParticles = (canvas.width * canvas.height) / 4000;
+      const numberOfParticles = (canvas.width * canvas.height) / 8000;
       for (let i = 0; i < numberOfParticles; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        particles.push(new Particle(x, y));
+        particles.push(new Particle());
       }
     };
 
@@ -88,11 +67,6 @@ export default function ParticleBackground() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouse.x = e.x;
-      mouse.y = e.y;
     };
 
     const animate = () => {
@@ -105,14 +79,11 @@ export default function ParticleBackground() {
     };
 
     window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
-    
     handleResize();
     animate();
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -126,7 +97,7 @@ export default function ParticleBackground() {
         left: 0,
         zIndex: 0,
         pointerEvents: 'none',
-        opacity: 0.6
+        background: '#050505'
       }}
     />
   );
