@@ -22,29 +22,25 @@ export default function Home() {
           className={styles.glassCard}
         >
           {/* Logo Section */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, delay: 0.2 }}
-            className={styles.logoWrapper}
-          >
+          <div className={styles.logoWrapper}>
             <Image 
               src="/logo.png" 
-              alt="Lectus Club Logo" 
-              width={180} 
-              height={180} 
+              alt="Lectus Social Club" 
+              width={220} 
+              height={220} 
               className={styles.mainLogo}
               priority
             />
-          </motion.div>
+          </div>
 
-          <h1 className={styles.loungeTitle}>
-            LECTUS<span>SOCIAL</span>CLUB
-          </h1>
+          <div className={styles.comingSoonHeader}>
+            <span className={styles.subtitle}>E S T . 2 0 2 6</span>
+            <h2 className={styles.mainStatement}>Bientôt, l'exceptionnel.</h2>
+          </div>
           
           <p className={styles.loungeTagline}>
-            L’exclusivité au sommet de son art. <br />
-            Un cercle privé dédié à l’élégance et au raffinement.
+            Le Lectus Social Club prépare son arrivée numérique. <br />
+            Un espace exclusif où l'héritage rencontre la modernité.
           </p>
 
           <div className={styles.statusBox}>
