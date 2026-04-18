@@ -34,11 +34,11 @@ export default function Home() {
           </div>
 
           <div className={styles.comingSoonHeader}>
-            <h1 className={styles.mainStatement}>Lectus Social Club prépare son ouverture.</h1>
+            <h1 className={styles.mainStatement}>L'excellence pour seul héritage.</h1>
           </div>
           
           <p className={styles.loungeTagline}>
-            Exclusivement pour nos membres.
+            Le cercle s'apprête à s'ouvrir.
           </p>
 
           <div className={styles.subscriptionArea}>
