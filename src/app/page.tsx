@@ -41,15 +41,20 @@ export default function Home() {
             Bientôt en ligne.
           </p>
 
-          <div className={styles.statusBox}>
-            <span className={styles.pulseDot}></span> Ouverture Prochaine
-          </div>
-
-          {/* Subscription Section */}
           <div className={styles.subscriptionArea}>
             {!isSubscribed ? (
-               <form className={styles.loungeForm} onSubmit={(e) => { e.preventDefault(); setIsSubscribed(true); }}>
-                  <input type="email" placeholder="Saisissez votre adresse email" required />
+               <form 
+                 className={styles.loungeForm} 
+                 name="invitation-request"
+                 method="POST" 
+                 data-netlify="true"
+                 onSubmit={(e) => { 
+                   // Let Netlify handle the submission, but we'll show the success message locally too
+                   setIsSubscribed(true); 
+                 }}
+               >
+                  <input type="hidden" name="form-name" value="invitation-request" />
+                  <input type="email" name="email" placeholder="Saisissez votre adresse email" required />
                   <button type="submit">Demander l'accès</button>
                </form>
             ) : (
