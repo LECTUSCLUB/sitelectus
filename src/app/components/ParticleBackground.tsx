@@ -28,8 +28,8 @@ export default function ParticleBackground() {
         this.x = Math.random() * canvas!.width;
         this.y = Math.random() * canvas!.height;
         this.size = Math.random() * 1.5 + 0.5;
-        // Moody gold/amber atmospheric colors
-        const colors = ['rgba(197, 160, 89, 0.4)', 'rgba(166, 124, 46, 0.3)', 'rgba(26, 26, 26, 0.1)'];
+        // Subtle gold/amber atmospheric colors
+        const colors = ['rgba(197, 160, 89, 0.3)', 'rgba(166, 124, 46, 0.2)', 'rgba(26, 26, 26, 0.05)'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.speedX = (Math.random() * 0.4) - 0.2;
         this.speedY = (Math.random() * 0.4) - 0.2;
@@ -97,7 +97,7 @@ export default function ParticleBackground() {
         left: 0,
         zIndex: 0,
         pointerEvents: 'none',
-        background: '#f8f6f2'
+        background: '#fdfaf5'
       }}
     />
   );

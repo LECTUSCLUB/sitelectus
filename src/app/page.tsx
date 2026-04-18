@@ -34,11 +34,11 @@ export default function Home() {
           </div>
 
           <div className={styles.comingSoonHeader}>
-            <h1 className={styles.mainStatement}>LECTUS SOCIAL CLUB : OUVERTURE PROCHAINE.</h1>
+            <h1 className={styles.mainStatement}>L'excellence pour seul horizon.</h1>
           </div>
           
           <p className={styles.loungeTagline}>
-            Un nouveau standard de l'exclusivité.
+            LECTUS SOCIAL CLUB — Ouverture prochaine.
           </p>
 
           <div className={styles.subscriptionArea}>
