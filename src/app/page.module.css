@@ -1,8 +1,8 @@
 .loungeContainer {
   min-height: 100vh;
   width: 100%;
-  background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #111111;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -19,9 +19,9 @@
 }
 
 .glassCard {
-  background: transparent;
-  padding: 4rem 2rem;
-  max-width: 800px;
+  background: #ffffff;
+  padding: 6rem 1.5rem;
+  max-width: 600px;
   width: 100%;
   text-align: center;
   position: relative;
@@ -29,7 +29,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 @media (min-width: 480px) {
@@ -40,26 +39,18 @@
 
 .glassCard::after {
   content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.5), transparent);
-  bottom: 0;
+  display: none;
 }
 
 .logoWrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   width: 100%;
 }
 
 .mainLogo {
   object-fit: contain;
-  filter: invert(1) brightness(1.5);
 }
 
 .comingSoonHeader {
@@ -70,24 +61,23 @@
 }
 
 .mainStatement {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  font-weight: 300;
-  color: #ffffff;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  text-transform: none;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 
 .loungeTagline {
   font-size: 1.1rem;
-  color: #c5a059;
+  color: #888888;
   line-height: 1.8;
   margin-bottom: 5rem;
-  font-weight: 500;
-  letter-spacing: 0.4em;
-  font-size: 0.65rem;
-  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
 }
 
 .featureGrid {
@@ -126,10 +116,10 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  background: rgba(255, 255, 255, 0.05);
+  background: #ffffff;
   padding: 0;
-  border-radius: 99px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  border: 1px solid #000000;
   overflow: hidden;
   max-width: 450px;
   margin: 0 auto;
@@ -145,35 +135,33 @@
   flex: 1;
   background: transparent;
   border: none;
-  padding: 1.2rem 2rem;
-  color: #ffffff;
+  padding: 1.2rem 1.5rem;
+  color: #000000;
   outline: none;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
 }
 
 .loungeForm input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: #999999;
 }
 
 .loungeForm button {
-  background: #c5a059;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
   border: none;
-  padding: 1.2rem 3rem;
-  border-radius: 99px;
-  margin: 4px;
+  padding: 1.2rem 2.5rem;
+  border-radius: 0;
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .loungeForm button:hover {
-  background: #ffffff;
-  color: #000000;
+  opacity: 0.8;
 }
 
 .loungeForm button:hover {
@@ -189,11 +177,11 @@
 
 .loungeFooter {
   padding: 3rem 4%;
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.2);
-  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  color: #999999;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid #eeeeee;
 }
 
 .footerFlex {
